@@ -1,0 +1,31 @@
+@base <http://www.cedri.com/PlatformBuilder-Layout#> .
+@prefix layout: <http://www.cedri.com/PlatformBuilder-Layout#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+layout:AppLayout rdf:type layout:Layout ;
+    layout:hasApiBaseUrl "http://127.0.0.1:5000" ;
+    layout:hasBusinessModelOntology "/ontologies/api/ASE_pkg/MarketMechanisms/TOUFIT.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/ASE_pkg/Simulators/ECGeoLocationBasedSimulator.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/UPB_pkg/Connectors/ERedesAPIConnector.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/UPB_pkg/FileInterface/CommunityConsGenCSVUpload.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/UPB_pkg/MarketMechanisms/DBMMarketMechanism.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/UPB_pkg/MarketMechanisms/SDMMarketMechanism.ttl" ;
+    layout:hasBusinessModelOntology "/ontologies/api/UPB_pkg/Optimization/ADMMOptimization.ttl" ;
+    .
+
+layout:AppHeader rdf:type layout:Header ;
+    layout:hasTitle "SmartLEM" ;
+    layout:hasHeight "64"^^xsd:integer ;
+    layout:isFixed "true"^^xsd:boolean .
+
+layout:AppSidebar rdf:type layout:Sidebar ;
+    layout:hasWidth "450"^^xsd:integer .
+
+layout:AppFooter rdf:type layout:Footer ;
+    layout:hasText "Smart-LEM-Platform" ;
+    layout:hasHeight "50"^^xsd:integer ;
+    layout:isFixed "true"^^xsd:boolean .
+
+layout:AppContent rdf:type layout:ContentArea ;
+    layout:hasPadding "24"^^xsd:integer .

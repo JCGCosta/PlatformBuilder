@@ -1,0 +1,82 @@
+@base <http://www.cedri.com/E_REDES_Connector#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix E_REDES_Connector: <http://www.cedri.com/E_REDES_Connector#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/E_REDES_Connector> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/E_REDES_Connector/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what E_REDES_Connector does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+E_REDES_Connector:E_REDES_Connector_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model E_REDES_Connector is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+E_REDES_Connector:CommunityLatitudeLongitude rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "CommunityLatitudeLongitude" ;
+                            bm:hasParameterType "list[float]" .
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+E_REDES_Connector:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+E_REDES_Connector:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+
+E_REDES_Connector:community_topology rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+# The Business Model (the concept shown in the platform)
+
+E_REDES_Connector:E_REDES_Connector rdf:type owl:NamedIndividual ,
+                       E_REDES_Connector:E_REDES_Connector_Class ;
+              bm:hasExternalCode E_REDES_Connector:E_REDES_ConnectorFunction ;
+              bm:hasParameter E_REDES_Connector:CommunityLatitudeLongitude;
+              bm:hasOutputMetadata E_REDES_Connector:status ,
+                                   E_REDES_Connector:desc ,
+                                   E_REDES_Connector:community_topology .
+
+# External Code (the Python entry point)
+
+E_REDES_Connector:E_REDES_ConnectorFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunE_REDES_Connector" ;
+                      excode:hasPythonFile "./UPB_pkg/E_REDES_Connector/E_REDES_Connector.py" ;
+                      excode:requiresLib "pydantic" .

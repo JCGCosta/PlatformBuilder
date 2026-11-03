@@ -1,0 +1,391 @@
+{
+  "project_info": {
+    "name": "SmartLEMPlatform",
+    "dir_path": "/home/warp/Documents/Universities/IPB/3_Investigacao/SMARTLEM/4_ProjectImplementations/PlatformBuilder/src/testing_projects/SmartLEMPlatform"
+  },
+  "concepts_sources": [
+    "/home/warp/Documents/Universities/IPB/3_Investigacao/SMARTLEM/4_ProjectImplementations/PlatformBuilder/concept_packages/SmartLEM_pkg",
+    "concept_packages/ASE_pkg",
+    "concept_packages/UPB_pkg",
+    "concept_packages/UI_pkg"
+  ],
+  "active_concepts": [
+    {
+      "key": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "x": 1212.0,
+      "y": 636.0
+    },
+    {
+      "key": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "x": 43.0,
+      "y": 508.0
+    },
+    {
+      "key": "PlatformBuilder/UI/Text#2",
+      "x": 1829.0,
+      "y": 170.0,
+      "label": "CommunityAggregatedBilling"
+    },
+    {
+      "key": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "x": 1214.0,
+      "y": 450.0
+    },
+    {
+      "key": "UPB_pkg/Connectors/ERedesAPIConnector",
+      "x": 955.0,
+      "y": 727.0
+    },
+    {
+      "key": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "x": 23.0,
+      "y": 44.0
+    },
+    {
+      "key": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "x": 1215.0,
+      "y": 25.0
+    },
+    {
+      "key": "UPB_pkg/Optimization/ADMMOptimization",
+      "x": 1791.0,
+      "y": 445.0
+    },
+    {
+      "key": "UPB_pkg/Indicators/CostsWithoutP2P",
+      "x": 1216.0,
+      "y": 284.0
+    },
+    {
+      "key": "UPB_pkg/Indicators/CostsWithP2P",
+      "x": 2484.0,
+      "y": 279.0
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph",
+      "x": 720.0,
+      "y": 44.0,
+      "label": "CommunityAggregatedConsGenGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Table",
+      "x": 1828.0,
+      "y": 68.0,
+      "label": "BillingPerMemberTable"
+    },
+    {
+      "key": "PlatformBuilder/UI/Image",
+      "x": -479.0,
+      "y": -247.0,
+      "label": "CommunityTopologyImage"
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph#2",
+      "x": 2487.0,
+      "y": 458.0,
+      "label": "CommunityEnergyGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph#3",
+      "x": 2487.0,
+      "y": 555.0,
+      "label": "CommunityPricesGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph#4",
+      "x": 2488.0,
+      "y": 645.0,
+      "label": "OptimizationConvergenceGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph#5",
+      "x": 2488.0,
+      "y": 737.0,
+      "label": "HouseFlowsGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Graph#6",
+      "x": 2486.0,
+      "y": 828.0,
+      "label": "DailyCostsGraph"
+    },
+    {
+      "key": "PlatformBuilder/UI/Table#2",
+      "x": 2487.0,
+      "y": 918.0,
+      "label": "HouseSummaryTable"
+    },
+    {
+      "key": "PlatformBuilder/UI/Table#3",
+      "x": 2489.0,
+      "y": 1007.0,
+      "label": "DailySummaryTable"
+    },
+    {
+      "key": "PlatformBuilder/UI/Table#4",
+      "x": 2489.0,
+      "y": 1095.0,
+      "label": "P2PTradesTable"
+    },
+    {
+      "key": "PlatformBuilder/UI/Text",
+      "x": 2490.0,
+      "y": 1182.0,
+      "label": "CommunitySummary"
+    },
+    {
+      "key": "PlatformBuilder/UI/Image#2",
+      "x": 2490.0,
+      "y": 1272.0,
+      "label": "TradeMatrixImage"
+    },
+    {
+      "key": "PlatformBuilder/UI/Image#3",
+      "x": 2488.0,
+      "y": 1364.0,
+      "label": "P2PHeatmapImage"
+    },
+    {
+      "key": "PlatformBuilder/UI/Image#4",
+      "x": 1791.0,
+      "y": 1017.0,
+      "label": "CommunityTopologyImage"
+    }
+  ],
+  "connections": [
+    {
+      "src": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "out": "gamma_overtime",
+      "dst": "UPB_pkg/Optimization/ADMMOptimization",
+      "in": "GammaOvertime"
+    },
+    {
+      "src": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "out": "community_data",
+      "dst": "UPB_pkg/Optimization/ADMMOptimization",
+      "in": "CommunityData"
+    },
+    {
+      "src": "UPB_pkg/Connectors/ERedesAPIConnector",
+      "out": "community_topology",
+      "dst": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "in": "CommunityTopology"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "generation_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "consumption_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "generation_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "consumption_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "generation_per_member",
+      "dst": "UPB_pkg/Indicators/CostsWithoutP2P",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "consumption_per_member",
+      "dst": "UPB_pkg/Indicators/CostsWithoutP2P",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "UPB_pkg/FileInterface/CommunityConsGenCSVUpload",
+      "out": "community_aggregated_data_to_plot",
+      "dst": "PlatformBuilder/UI/Graph",
+      "in": "Data"
+    },
+    {
+      "src": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "out": "community_aggregated_billing_to_text",
+      "dst": "PlatformBuilder/UI/Text#2",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "out": "community_data",
+      "dst": "UPB_pkg/Optimization/ADMMOptimization",
+      "in": "CommunityData"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "generation_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "consumption_per_member",
+      "dst": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "deficit_per_member",
+      "dst": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "in": "DeficitPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "surplus_per_member",
+      "dst": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "in": "SurplusPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "generation_per_member",
+      "dst": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "consumption_per_member",
+      "dst": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "UPB_pkg/MarketMechanisms/SupplyDemandMatchingMechanism",
+      "out": "gamma_overtime",
+      "dst": "UPB_pkg/Optimization/ADMMOptimization",
+      "in": "GammaOvertime"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "consumption_per_member",
+      "dst": "UPB_pkg/Indicators/CostsWithoutP2P",
+      "in": "ConsumptionPerMember"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "generation_per_member",
+      "dst": "UPB_pkg/Indicators/CostsWithoutP2P",
+      "in": "GenerationPerMember"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "admm_results",
+      "dst": "UPB_pkg/Indicators/CostsWithP2P",
+      "in": "ADMMResults"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "community_data_propagation",
+      "dst": "UPB_pkg/Indicators/CostsWithP2P",
+      "in": "CommunityData"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "gamma_overtime_propagation",
+      "dst": "UPB_pkg/Indicators/CostsWithP2P",
+      "in": "GammaOvertime"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "fixed_price_propagation",
+      "dst": "UPB_pkg/Indicators/CostsWithP2P",
+      "in": "FixedPrice"
+    },
+    {
+      "src": "ASE_pkg/Simulators/EnergyCommunityGeoLocationBasedSimulator",
+      "out": "community_aggregated_data_to_plot",
+      "dst": "PlatformBuilder/UI/Graph",
+      "in": "Data"
+    },
+    {
+      "src": "ASE_pkg/MarketMechanisms/TOUFITMechanism",
+      "out": "billing_per_member_to_table",
+      "dst": "PlatformBuilder/UI/Table",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "graph_community_energy",
+      "dst": "PlatformBuilder/UI/Graph#2",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "graph_prices",
+      "dst": "PlatformBuilder/UI/Graph#3",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "graph_admm_convergence",
+      "dst": "PlatformBuilder/UI/Graph#4",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "graph_house_flows",
+      "dst": "PlatformBuilder/UI/Graph#5",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "graph_daily_costs",
+      "dst": "PlatformBuilder/UI/Graph#6",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "table_house_summary",
+      "dst": "PlatformBuilder/UI/Table#2",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "table_daily_summary",
+      "dst": "PlatformBuilder/UI/Table#3",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "table_p2p_trades",
+      "dst": "PlatformBuilder/UI/Table#4",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "text_summary",
+      "dst": "PlatformBuilder/UI/Text",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "image_trade_matrix",
+      "dst": "PlatformBuilder/UI/Image#2",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/Optimization/ADMMOptimization",
+      "out": "image_p2p_heatmap",
+      "dst": "PlatformBuilder/UI/Image#3",
+      "in": "Data"
+    },
+    {
+      "src": "UPB_pkg/MarketMechanisms/DistanceBasedMatchingMechanism",
+      "out": "community_topology_to_image",
+      "dst": "PlatformBuilder/UI/Image#4",
+      "in": "Data"
+    }
+  ]
+}

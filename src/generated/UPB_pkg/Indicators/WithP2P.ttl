@@ -1,0 +1,92 @@
+@base <http://www.cedri.com/WithP2P#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix WithP2P: <http://www.cedri.com/WithP2P#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/WithP2P> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/WithP2P/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what WithP2P does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+WithP2P:WithP2P_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model WithP2P is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+WithP2P:CommunityData rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "CommunityData" ;
+                    bm:hasParameterType "list[object]" .
+                    
+WithP2P:GammaOvertime rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "GammaOvertime" ;
+                    bm:hasParameterType "list[list]" .
+                    
+WithP2P:ADMMResults rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "ADMMResults" ;
+                    bm:hasParameterType "dict" .
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+WithP2P:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+WithP2P:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+
+WithP2P:result rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "float" .
+
+# The Business Model (the concept shown in the platform)
+
+WithP2P:WithP2P rdf:type owl:NamedIndividual ,
+                       WithP2P:WithP2P_Class ;
+              bm:hasExternalCode WithP2P:WithP2PFunction ;
+              bm:hasParameter WithP2P:ADMMResults, WithP2P:CommunityData, WithP2P:GammaOvertime   ;
+              bm:hasOutputMetadata WithP2P:status ,
+                                   WithP2P:desc ,
+                                   WithP2P:result .
+
+# External Code (the Python entry point)
+
+WithP2P:WithP2PFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunWithP2P" ;
+                      excode:hasPythonFile "./UPB_pkg/Indicators/WithP2P.py" ;
+                      excode:requiresLib "pydantic" .

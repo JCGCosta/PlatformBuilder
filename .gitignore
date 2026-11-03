@@ -1,0 +1,8 @@
+/SmartLEM_Framework
+/LegacyOperations
+/concept_packages
+/tmp
+# Generated UI (Vite app): dependencies and build output
+src/generated/ui/node_modules/
+src/generated/ui/dist/
+src/generated/ui/ui.log

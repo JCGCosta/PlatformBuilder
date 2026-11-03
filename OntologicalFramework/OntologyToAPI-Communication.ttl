@@ -1,0 +1,188 @@
+@prefix : <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.cedri.com/OntologyToAPI-Communications#> .
+
+:v1.0.10 rdf:type owl:Class .
+
+: rdf:type owl:Ontology ;
+           owl:versionIRI :v1.0.10 ;
+           dcterms:creator "https://orcid.org/0000-0002-7620-0960" ;
+           dcterms:description "This ontology represent the communication concepts from multiple system." ;
+           dcterms:issued "2025-06-30" ;
+           dcterms:modified "2026-02-21" .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.cedri.com/OntologyToAPI-Communications#APICommunication
+:APICommunication rdf:type owl:Class ;
+                  rdfs:subClassOf :CommunicationTechnology ;
+                  rdfs:comment "A class representing API-based communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#DatabaseCommunication
+:DatabaseCommunication rdf:type owl:Class ;
+                       rdfs:subClassOf :CommunicationTechnology ;
+                       rdfs:comment "A class representing communication with databases." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#FileBasedCommunication
+:FileBasedCommunication rdf:type owl:Class ;
+                        rdfs:subClassOf :CommunicationTechnology ;
+                        rdfs:comment "A class representing communication through file systems." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#MessageQueueCommunication
+:MessageQueueCommunication rdf:type owl:Class ;
+                           rdfs:subClassOf :CommunicationTechnology ;
+                           rdfs:comment "A class representing message broker or queue-based communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#RPCCommunication
+:RPCCommunication rdf:type owl:Class ;
+                  rdfs:subClassOf :CommunicationTechnology ;
+                  rdfs:comment "A class representing Remote Procedure Call-based communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#ServiceMeshCommunication
+:ServiceMeshCommunication rdf:type owl:Class ;
+                          rdfs:subClassOf :CommunicationTechnology ;
+                          rdfs:comment "A class representing service mesh-based internal service communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#SocketCommunication
+:SocketCommunication rdf:type owl:Class ;
+                     rdfs:subClassOf :CommunicationTechnology ;
+                     rdfs:comment "A class representing socket-based communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#WebSocketCommunication
+:WebSocketCommunication rdf:type owl:Class ;
+                        rdfs:subClassOf :CommunicationTechnology ;
+                        rdfs:comment "A class representing WebSocket communication." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications/CommunicationTechnology
+:CommunicationTechnology rdf:type owl:Class ;
+                           rdfs:comment "A class representing communication technology." .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasConnectionString
+:hasConnectionString rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain :DatabaseCommunication ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "connection string for databases (e.g., SQL and non-SQL databases)" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasEndpoint
+:hasEndpoint rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :APICommunication ;
+             rdfs:range xsd:string ;
+             rdfs:comment "has a endpoint structure to request data" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasFileType
+:hasFileType rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :FileBasedCommunication ;
+             rdfs:range xsd:string ;
+             rdfs:comment "has a file type (e.g., XLS, XLSX, CSV, JSON, etc)" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasIPAddress
+:hasIPAddress rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :CommunicationTechnology ;
+              rdfs:range xsd:string ;
+              rdfs:comment "the internet protocol address" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasPath
+:hasPath rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :FileBasedCommunication ;
+         rdfs:range xsd:string ;
+         rdfs:comment "has a path for a specific file or directory" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasPort
+:hasPort rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :CommunicationTechnology ;
+         rdfs:range xsd:integer ;
+         rdfs:comment "has default port" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasQueryCall
+:hasQueryCall rdf:type owl:DatatypeProperty ;
+              rdfs:domain :DatabaseCommunication ;
+              rdfs:range xsd:string ;
+              rdfs:comment "a generic query within any data storing technology to insert, retrieve or update information" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasQueueName
+:hasQueueName rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :MessageQueueCommunication ;
+              rdfs:range xsd:string ;
+              rdfs:comment "has a pub/sub queue name" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasRequestURL
+:hasRequestURL rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :APICommunication ;
+               rdfs:range xsd:string ;
+               rdfs:comment "has a request URL mainly for an API call" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasResponseField
+:hasResponseField rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :APICommunication ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "has a response field in the content of message from an API call" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#hasSecurityLevel
+:hasSecurityLevel rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :CommunicationTechnology ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "e.g., none, basic, TLS, end-to-end" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#isStateful
+:isStateful rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :CommunicationTechnology ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "whether the communication maintains state (e.g., WebSockets = true, REST = false)." .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#usesMessageFormat
+:usesMessageFormat rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain :CommunicationTechnology ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "e.g., JSON, XML, Protobuf, Binary" .
+
+
+###  http://www.cedri.com/OntologyToAPI-Communications#usesTechnology
+:usesTechnology rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :DatabaseCommunication ;
+                rdfs:range xsd:string ;
+                rdfs:comment "the database tool (e. g. MySQL, MongoDB, MariaDB, etc.)" .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

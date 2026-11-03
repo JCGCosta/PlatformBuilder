@@ -1,0 +1,257 @@
+{
+  "name": "SmartLEM",
+  "latitude": 44.25,
+  "longitude": -6.25,
+  "members": [
+    {
+      "member_id": 1,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "PVAsset": {
+          "rated_power": 5.89,
+          "tilt": 30,
+          "orientation": 180,
+          "efficiency": 0.9
+        }
+      }
+    },
+    {
+      "member_id": 2,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "WindAsset": {
+          "rated_power": 5.98,
+          "ws_cut_in": 3,
+          "ws_cut_out": 25,
+          "ws_rated": 12,
+          "hub_height": 50,
+          "alpha": 0.14
+        }
+      }
+    },
+    {
+      "member_id": 3,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "PVAsset": {
+          "rated_power": 5.89,
+          "tilt": 30,
+          "orientation": 180,
+          "efficiency": 0.9
+        }
+      }
+    },
+    {
+      "member_id": 4,
+      "member_type": "commercial",
+      "building_size": 15,
+      "building_surface_area": 556,
+      "occupants": 30,
+      "building_insulation": "high",
+      "appliances": 30,
+      "occupancy_schedule": "daytime",
+      "heating_type": "central",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        }
+      },
+      "activity_type": "office"
+    },
+    {
+      "member_id": 5,
+      "member_type": "utility",
+      "building_size": 5,
+      "building_surface_area": 150,
+      "occupants": 1,
+      "building_insulation": null,
+      "appliances": 1,
+      "occupancy_schedule": "daytime",
+      "heating_type": null,
+      "heating_system": null,
+      "cooling_system": null,
+      "water_heating_system": null,
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "WindAsset": {
+          "rated_power": 5.98,
+          "ws_cut_in": 3,
+          "ws_cut_out": 25,
+          "ws_rated": 12,
+          "hub_height": 50,
+          "alpha": 0.14
+        }
+      }
+    },
+    {
+      "member_id": 6,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "WindAsset": {
+          "rated_power": 5.98,
+          "ws_cut_in": 3,
+          "ws_cut_out": 25,
+          "ws_rated": 12,
+          "hub_height": 50,
+          "alpha": 0.14
+        }
+      }
+    },
+    {
+      "member_id": 7,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "PVAsset": {
+          "rated_power": 5.89,
+          "tilt": 30,
+          "orientation": 180,
+          "efficiency": 0.9
+        }
+      }
+    },
+    {
+      "member_id": 8,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        }
+      }
+    },
+    {
+      "member_id": 9,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        },
+        "PVAsset": {
+          "asset_name": "PVAsset",
+          "rated_power": 5.89,
+          "tilt": 30,
+          "orientation": 180,
+          "efficiency": 0.9
+        }
+      }
+    },
+    {
+      "member_id": 10,
+      "member_type": "residential",
+      "building_size": 4,
+      "building_surface_area": 119,
+      "occupants": 2,
+      "building_insulation": "high",
+      "appliances": 2,
+      "occupancy_schedule": "daytime",
+      "heating_type": "individual",
+      "heating_system": "heat pump",
+      "cooling_system": "heat pump",
+      "water_heating_system": "heat pump",
+      "assets": {
+        "BaselineLoad": {
+          "load_capacity": 9,
+          "installed_power": 0.27
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+@base <http://www.cedri.com/ERedesAPIConnector#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix ERedesAPIConnector: <http://www.cedri.com/ERedesAPIConnector#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/ERedesAPIConnector> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/ERedesAPIConnector/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what ERedesAPIConnector does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+ERedesAPIConnector:ERedesAPIConnector_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model ERedesAPIConnector is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+ERedesAPIConnector:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+ERedesAPIConnector:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+
+ERedesAPIConnector:community_topology rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+# The Business Model (the concept shown in the platform)
+
+ERedesAPIConnector:ERedesAPIConnector rdf:type owl:NamedIndividual ,
+                       ERedesAPIConnector:ERedesAPIConnector_Class ;
+              bm:hasExternalCode ERedesAPIConnector:ERedesAPIConnectorFunction ;
+              bm:hasOutputMetadata ERedesAPIConnector:status ,
+                                   ERedesAPIConnector:desc ,
+                                   ERedesAPIConnector:community_topology .
+
+# External Code (the Python entry point)
+
+ERedesAPIConnector:ERedesAPIConnectorFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunERedesAPIConnector" ;
+                      excode:hasPythonFile "./UPB_pkg/Connectors/ERedesAPIConnector.py" ;
+                      excode:requiresLib "pydantic" .

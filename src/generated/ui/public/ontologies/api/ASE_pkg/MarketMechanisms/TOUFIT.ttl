@@ -1,0 +1,118 @@
+@base <http://www.cedri.com/SmartLEM-TOUFIT#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+@prefix TOUFIT: <http://www.cedri.com/SmartLEM-TOUFIT#> .
+
+<http://www.cedri.com/SmartLEM-TOUFIT> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://www.cedri.com/SmartLEM-TOUFIT/2.0.0> ;
+                                                           owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                                                           <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                                           <http://purl.org/dc/terms/description> "Local Electricity Market simulator: simulates all assets of all members of an Energy Community, described in a single configuration." ;
+                                                           <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                                           <http://purl.org/dc/terms/modified> "2026-10-12" .
+
+#################################################################
+#    Classes
+#################################################################
+
+TOUFIT:ASE_Market_Mechanisms rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "Runs a market clearing mechanism based in TOU and FIT pricing strategies." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+TOUFIT:consumption_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "ConsumptionPerMember" ;
+                            bm:hasParameterType "dict" .
+
+TOUFIT:generation_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "GenerationPerMember" ;
+                            bm:hasParameterType "dict" .
+
+TOUFIT:deficit_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "DeficitPerMember" ;
+                            bm:hasParameterType "dict" .
+
+TOUFIT:surplus_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "SurplusPerMember" ;
+                            bm:hasParameterType "dict" .
+
+TOUFIT:TOU rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "TOU" ;
+                            bm:hasParameterType "float" .
+
+TOUFIT:FIT rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "FIT" ;
+                            bm:hasParameterType "float" .
+
+# Expected Outputs
+
+TOUFIT:status rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+TOUFIT:desc rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+TOUFIT:billing_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+TOUFIT:community_aggregated_billing rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+TOUFIT:billing_per_member_to_table rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+                     
+TOUFIT:community_aggregated_billing_to_text rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+# Simulate Energy Community
+
+TOUFIT:TOUFITMechanism rdf:type owl:NamedIndividual ,
+                                      TOUFIT:ASE_Market_Mechanisms ;
+                             bm:hasExternalCode TOUFIT:TOUFITMechanismFunction ;
+                             bm:hasParameter TOUFIT:consumption_per_member ,
+                                             TOUFIT:generation_per_member ,
+                                             TOUFIT:surplus_per_member ,
+                                             TOUFIT:deficit_per_member ,
+                                             TOUFIT:TOU ,
+                                             TOUFIT:FIT ;
+                             bm:hasOutputMetadata TOUFIT:status ,
+                                                  TOUFIT:desc ,
+                                                  TOUFIT:billing_per_member ,
+                                                  TOUFIT:community_aggregated_billing ,
+                                                  TOUFIT:billing_per_member_to_table,
+                                                  TOUFIT:community_aggregated_billing_to_text .
+
+TOUFIT:TOUFITMechanismFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "RunTOUFITMarket" ;
+                               excode:hasPythonFile "./ASE_pkg/MarketMechanisms/TOUFIT.py" ;
+                               excode:requiresLib "pydantic" .

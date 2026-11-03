@@ -1,0 +1,199 @@
+@prefix ui: <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix view: <http://www.cedri.com/PlatformBuilder/views/CommunityConsGenCSVUpload_ERedesAPIConnector_DistanceBasedMatchingMechanism_ADMMOptimization#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+view:pipeline a ui:Pipeline ;
+    ui:hasDisplay view:display_1,
+        view:display_10,
+        view:display_11,
+        view:display_12,
+        view:display_13,
+        view:display_2,
+        view:display_3,
+        view:display_4,
+        view:display_5,
+        view:display_6,
+        view:display_7,
+        view:display_8,
+        view:display_9 ;
+    ui:hasLink view:link_1,
+        view:link_2,
+        view:link_3,
+        view:link_4,
+        view:link_5 ;
+    ui:hasPipelineInput view:input_1,
+        view:input_2,
+        view:input_3,
+        view:input_4 ;
+    ui:hasStep view:step_UPB_pkg_Connectors_ERedesAPIConnector,
+        view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload,
+        view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism,
+        view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "CommunityConsGenCSVUpload → ERedesAPIConnector → DistanceBasedMatchingMechanism → ADMMOptimization" ;
+    ui:order 1 .
+
+view:display_1 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Image" ;
+    ui:hasSourceOutput "community_topology_to_image" ;
+    ui:hasSourceStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism ;
+    ui:hasTitle "CommunityTopologyImage" ;
+    ui:order 1 .
+
+view:display_10 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "graph_admm_convergence" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "OptimizationConvergenceGraph" ;
+    ui:order 10 .
+
+view:display_11 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "graph_prices" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "CommunityPricesGraph" ;
+    ui:order 11 .
+
+view:display_12 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "graph_community_energy" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "CommunityEnergyGraph" ;
+    ui:order 12 .
+
+view:display_13 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "community_aggregated_data_to_plot" ;
+    ui:hasSourceStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:hasTitle "CommunityAggregatedConsGenGraph" ;
+    ui:order 13 .
+
+view:display_2 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Image" ;
+    ui:hasSourceOutput "image_p2p_heatmap" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "P2PHeatmapImage" ;
+    ui:order 2 .
+
+view:display_3 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Image" ;
+    ui:hasSourceOutput "image_trade_matrix" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "TradeMatrixImage" ;
+    ui:order 3 .
+
+view:display_4 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Text" ;
+    ui:hasSourceOutput "text_summary" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "CommunitySummary" ;
+    ui:order 4 .
+
+view:display_5 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Table" ;
+    ui:hasSourceOutput "table_p2p_trades" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "P2PTradesTable" ;
+    ui:order 5 .
+
+view:display_6 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Table" ;
+    ui:hasSourceOutput "table_daily_summary" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "DailySummaryTable" ;
+    ui:order 6 .
+
+view:display_7 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Table" ;
+    ui:hasSourceOutput "table_house_summary" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "HouseSummaryTable" ;
+    ui:order 7 .
+
+view:display_8 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "graph_daily_costs" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "DailyCostsGraph" ;
+    ui:order 8 .
+
+view:display_9 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "graph_house_flows" ;
+    ui:hasSourceStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:hasTitle "HouseFlowsGraph" ;
+    ui:order 9 .
+
+view:input_1 a ui:PipelineInput ;
+    ui:hasInputName "ECConsGenCSV" ;
+    ui:hasTargetParameter "ECConsGenCSV" ;
+    ui:hasTargetStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:order 1 .
+
+view:input_2 a ui:PipelineInput ;
+    ui:hasInputName "StartingDate" ;
+    ui:hasTargetParameter "StartingDate" ;
+    ui:hasTargetStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:order 2 .
+
+view:input_3 a ui:PipelineInput ;
+    ui:hasInputName "AnalysisPeriod" ;
+    ui:hasTargetParameter "AnalysisPeriod" ;
+    ui:hasTargetStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:order 3 .
+
+view:input_4 a ui:PipelineInput ;
+    ui:hasInputName "FixedPrice" ;
+    ui:hasTargetParameter "FixedPrice" ;
+    ui:hasTargetStep view:step_UPB_pkg_Optimization_ADMMOptimization ;
+    ui:order 4 .
+
+view:link_1 a ui:PipelineLink ;
+    ui:hasSourceOutput "community_topology" ;
+    ui:hasSourceStep view:step_UPB_pkg_Connectors_ERedesAPIConnector ;
+    ui:hasTargetParameter "CommunityTopology" ;
+    ui:hasTargetStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism .
+
+view:link_2 a ui:PipelineLink ;
+    ui:hasSourceOutput "consumption_per_member" ;
+    ui:hasSourceStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:hasTargetParameter "ConsumptionPerMember" ;
+    ui:hasTargetStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism .
+
+view:link_3 a ui:PipelineLink ;
+    ui:hasSourceOutput "generation_per_member" ;
+    ui:hasSourceStep view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload ;
+    ui:hasTargetParameter "GenerationPerMember" ;
+    ui:hasTargetStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism .
+
+view:link_4 a ui:PipelineLink ;
+    ui:hasSourceOutput "community_data" ;
+    ui:hasSourceStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism ;
+    ui:hasTargetParameter "CommunityData" ;
+    ui:hasTargetStep view:step_UPB_pkg_Optimization_ADMMOptimization .
+
+view:link_5 a ui:PipelineLink ;
+    ui:hasSourceOutput "gamma_overtime" ;
+    ui:hasSourceStep view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism ;
+    ui:hasTargetParameter "GammaOvertime" ;
+    ui:hasTargetStep view:step_UPB_pkg_Optimization_ADMMOptimization .
+
+view:step_UPB_pkg_Connectors_ERedesAPIConnector a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/ERedesAPIConnector#ERedesAPIConnector> ;
+    ui:hasTitle "ERedesAPIConnector" ;
+    ui:order 2 .
+
+view:step_UPB_pkg_FileInterface_CommunityConsGenCSVUpload a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/CommunityConsGenCSVUpload#CommunityConsGenCSVUpload> ;
+    ui:hasTitle "CommunityConsGenCSVUpload" ;
+    ui:order 1 .
+
+view:step_UPB_pkg_MarketMechanisms_DistanceBasedMatchingMechanism a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/SmartLEM-DBMMarketMechanism#DistanceBasedMatchingMechanism> ;
+    ui:hasTitle "DistanceBasedMatchingMechanism" ;
+    ui:order 3 .
+
+view:step_UPB_pkg_Optimization_ADMMOptimization a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/ADMMOptimization#ADMMOptimization> ;
+    ui:hasTitle "ADMMOptimization" ;
+    ui:order 4 .
+

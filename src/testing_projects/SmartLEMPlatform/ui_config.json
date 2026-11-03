@@ -1,0 +1,20 @@
+{
+  "title": "SmartLEM",
+  "footer": "Smart-LEM-Platform",
+  "groups": {
+    "pipelines": "Business Models",
+    "models": "Business Models"
+  },
+  "header": {
+    "height": 64,
+    "fixed": true
+  },
+  "sidebar": {
+    "width": 450
+  },
+  "footerBar": {
+    "height": 50,
+    "fixed": true
+  },
+  "contentPadding": 24
+}

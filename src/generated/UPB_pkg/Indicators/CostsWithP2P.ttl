@@ -1,0 +1,97 @@
+@base <http://www.cedri.com/CostsWithP2P#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix CostsWithP2P: <http://www.cedri.com/CostsWithP2P#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/CostsWithP2P> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/CostsWithP2P/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what CostsWithP2P does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+CostsWithP2P:CostsWithP2P_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model CostsWithP2P is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+CostsWithP2P:CommunityData rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "CommunityData" ;
+                    bm:hasParameterType "list[object]" .
+                    
+CostsWithP2P:GammaOvertime rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "GammaOvertime" ;
+                    bm:hasParameterType "list[list]" .
+                    
+CostsWithP2P:ADMMResults rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "ADMMResults" ;
+                    bm:hasParameterType "dict" .
+                    
+CostsWithP2P:FixedPrice rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "FixedPrice" ;
+                    bm:hasParameterType "float" .
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+CostsWithP2P:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+CostsWithP2P:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+
+CostsWithP2P:costs rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+# The Business Model (the concept shown in the platform)
+
+CostsWithP2P:CostsWithP2P rdf:type owl:NamedIndividual ,
+                       CostsWithP2P:CostsWithP2P_Class ;
+              bm:hasExternalCode CostsWithP2P:CostsWithP2PFunction ;
+              bm:hasParameter CostsWithP2P:ADMMResults, CostsWithP2P:CommunityData, CostsWithP2P:GammaOvertime, CostsWithP2P:FixedPrice ;
+              bm:hasOutputMetadata CostsWithP2P:status ,
+                                   CostsWithP2P:desc ,
+                                   CostsWithP2P:costs .
+
+# External Code (the Python entry point)
+
+CostsWithP2P:CostsWithP2PFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunCostsWithP2P" ;
+                      excode:hasPythonFile "./UPB_pkg/Indicators/CostsWithP2P.py" ;
+                      excode:requiresLib "pydantic" .

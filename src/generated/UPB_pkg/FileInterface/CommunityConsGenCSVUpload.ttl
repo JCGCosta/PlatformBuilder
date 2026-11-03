@@ -1,0 +1,102 @@
+@base <http://www.cedri.com/CommunityConsGenCSVUpload#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix CommunityConsGenCSVUpload: <http://www.cedri.com/CommunityConsGenCSVUpload#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/CommunityConsGenCSVUpload> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/CommunityConsGenCSVUpload/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what CommunityConsGenCSVUpload does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+CommunityConsGenCSVUpload:CommunityConsGenCSVUpload_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model CommunityConsGenCSVUpload is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+CommunityConsGenCSVUpload:ECConsGenCSV rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "ECConsGenCSV" ;
+                            bm:hasParameterType "UploadFile" .
+                            
+CommunityConsGenCSVUpload:StartingDate rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "StartingDate" ;
+                            bm:hasParameterType "str" .
+                            
+CommunityConsGenCSVUpload:AnalysisPeriod rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "AnalysisPeriod" ;
+                            bm:hasParameterType "int" .
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+CommunityConsGenCSVUpload:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+CommunityConsGenCSVUpload:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+                     
+CommunityConsGenCSVUpload:community_aggregated_data_to_plot rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+                     
+CommunityConsGenCSVUpload:consumption_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+CommunityConsGenCSVUpload:generation_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+# The Business Model (the concept shown in the platform)
+
+CommunityConsGenCSVUpload:CommunityConsGenCSVUpload rdf:type owl:NamedIndividual ,
+                       CommunityConsGenCSVUpload:CommunityConsGenCSVUpload_Class ;
+              bm:hasExternalCode CommunityConsGenCSVUpload:CommunityConsGenCSVUploadFunction ;
+              bm:hasParameter CommunityConsGenCSVUpload:ECConsGenCSV, CommunityConsGenCSVUpload:StartingDate, CommunityConsGenCSVUpload:AnalysisPeriod ;
+              bm:hasOutputMetadata CommunityConsGenCSVUpload:status ,
+                                   CommunityConsGenCSVUpload:desc ,
+                                   CommunityConsGenCSVUpload:community_aggregated_data_to_plot ,
+                                   CommunityConsGenCSVUpload:consumption_per_member ,
+                                   CommunityConsGenCSVUpload:generation_per_member .
+
+# External Code (the Python entry point)
+
+CommunityConsGenCSVUpload:CommunityConsGenCSVUploadFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunCommunityConsGenCSVUpload" ;
+                      excode:hasPythonFile "./UPB_pkg/FileInterface/CommunityConsGenCSVUpload.py" ;
+                      excode:requiresLib "pydantic" .

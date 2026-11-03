@@ -1,0 +1,30 @@
+{
+  "views": [
+    {
+      "type": "group",
+      "name": "Business Models",
+      "views": [
+        {
+          "name": "EnergyCommunityGeoLocationBasedSimulator → TOUFITMechanism",
+          "file": "/ontologies/views/EnergyCommunityGeoLocationBasedSimulator_TOUFITMechanism.ttl"
+        },
+        {
+          "name": "EnergyCommunityGeoLocationBasedSimulator → SupplyDemandMatchingMechanism → ADMMOptimization",
+          "file": "/ontologies/views/EnergyCommunityGeoLocationBasedSimulator_SupplyDemandMatchingMechanism_ADMMOptimization.ttl"
+        },
+        {
+          "name": "CommunityConsGenCSVUpload → SupplyDemandMatchingMechanism → ADMMOptimization",
+          "file": "/ontologies/views/CommunityConsGenCSVUpload_SupplyDemandMatchingMechanism_ADMMOptimization.ttl"
+        },
+        {
+          "name": "EnergyCommunityGeoLocationBasedSimulator → ERedesAPIConnector → DistanceBasedMatchingMechanism → ADMMOptimization",
+          "file": "/ontologies/views/EnergyCommunityGeoLocationBasedSimulator_ERedesAPIConnector_DistanceBasedMatchingMechanism_ADMMOptimization.ttl"
+        },
+        {
+          "name": "CommunityConsGenCSVUpload → ERedesAPIConnector → DistanceBasedMatchingMechanism → ADMMOptimization",
+          "file": "/ontologies/views/CommunityConsGenCSVUpload_ERedesAPIConnector_DistanceBasedMatchingMechanism_ADMMOptimization.ttl"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+@base <http://www.cedri.com/ADMMOptimization#> .
+
+#################################################################
+#    Prefixes
+#################################################################
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Ontological framework
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+# This ontology
+@prefix ADMMOptimization: <http://www.cedri.com/ADMMOptimization#> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+<http://www.cedri.com/ADMMOptimization> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://www.cedri.com/ADMMOptimization/1.0.0> ;
+                              owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                          <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                              <http://purl.org/dc/terms/description> "Describe what ADMMOptimization does." .
+
+#################################################################
+#    Classes
+#################################################################
+
+ADMMOptimization:ADMMOptimization_Class rdf:type owl:Class ;
+                    rdfs:subClassOf bm:BusinessModel ;
+                    rdfs:comment "Describe the kind of business model ADMMOptimization is." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+ADMMOptimization:GammaOvertime rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "GammaOvertime" ;
+                    bm:hasParameterType "list[list]" .
+                    
+ADMMOptimization:FixedPrice rdf:type owl:NamedIndividual ,
+                             bm:Parameter ;
+                    bm:hasParameterLabel "FixedPrice" ;
+                    bm:hasParameterType "float" .
+                    
+ADMMOptimization:community_data rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "CommunityData" ;
+                            bm:hasParameterType "list[object]" .
+
+# Expected Outputs (the types are used to match them with the inputs of other concepts)
+
+ADMMOptimization:status rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+ADMMOptimization:desc rdf:type owl:NamedIndividual ,
+                     md:Metadata ;
+            md:hasType "str" .
+              
+ADMMOptimization:admm_results rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+              
+ADMMOptimization:community_data_propagation rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "list[object]" .
+              
+ADMMOptimization:gamma_overtime_propagation rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "list[list]" .
+              
+ADMMOptimization:fixed_price_propagation rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "float" .
+
+ADMMOptimization:graph_community_energy rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+ADMMOptimization:graph_prices rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+ADMMOptimization:graph_admm_convergence rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+ADMMOptimization:graph_house_flows rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+ADMMOptimization:graph_daily_costs rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "dict" .
+
+ADMMOptimization:table_house_summary rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "list[object]" .
+
+ADMMOptimization:table_daily_summary rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "list[object]" .
+
+ADMMOptimization:table_p2p_trades rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "list[object]" .
+
+ADMMOptimization:text_summary rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+ADMMOptimization:text_summary rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+ADMMOptimization:image_trade_matrix rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+ADMMOptimization:image_p2p_heatmap rdf:type owl:NamedIndividual ,
+                       md:Metadata ;
+              md:hasType "str" .
+
+# The Business Model (the concept shown in the platform)
+
+ADMMOptimization:ADMMOptimization rdf:type owl:NamedIndividual ,
+                       ADMMOptimization:ADMMOptimization_Class ;
+              bm:hasExternalCode ADMMOptimization:ADMMOptimizationFunction ;
+              bm:hasParameter ADMMOptimization:GammaOvertime,  ADMMOptimization:community_data, ADMMOptimization:FixedPrice ;
+              bm:hasOutputMetadata ADMMOptimization:status ,
+                                   ADMMOptimization:desc ,
+                                   ADMMOptimization:admm_results,
+                                   ADMMOptimization:community_data_propagation,
+                                   ADMMOptimization:gamma_overtime_propagation,
+                                   ADMMOptimization:fixed_price_propagation ,
+                                   ADMMOptimization:graph_community_energy,
+                                   ADMMOptimization:graph_prices,
+                                   ADMMOptimization:graph_admm_convergence,
+                                   ADMMOptimization:graph_house_flows,
+                                   ADMMOptimization:graph_daily_costs,
+                                   ADMMOptimization:table_house_summary,
+                                   ADMMOptimization:table_daily_summary,
+                                   ADMMOptimization:table_p2p_trades,
+                                   ADMMOptimization:text_summary,
+                                   ADMMOptimization:image_trade_matrix,
+                                   ADMMOptimization:image_p2p_heatmap .
+
+# External Code (the Python entry point)
+
+ADMMOptimization:ADMMOptimizationFunction rdf:type owl:NamedIndividual ,
+                               excode:ExternalCode ;
+                      excode:hasFunction "RunADMMOptimization" ;
+                      excode:hasPythonFile "./UPB_pkg/Optimization/ADMMOptimization.py" ;
+                      excode:requiresLib "pydantic" .

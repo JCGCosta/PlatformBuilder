@@ -1,0 +1,43 @@
+@prefix : <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+
+# Extension of the user interface vocabulary read by the engine (namespace OntologyToUI-UserInterface#).
+# A Pipeline runs several business models one after the other (one POST per endpoint); the outputs of a step
+# feed the parameters of later steps and only the parameters nothing feeds are asked from the user.
+
+<http://www.cedri.com/OntologyToUI-Pipeline> rdf:type owl:Ontology ;
+    rdfs:comment "Pipeline element: sequential execution of business model endpoints with the missing inputs asked from the user." .
+
+:Pipeline rdf:type owl:Class ;
+    rdfs:comment "UI element. Has ordered steps, links between them and the inputs that remain to be filled." .
+
+:PipelineStep rdf:type owl:Class ;
+    rdfs:comment "One business model of a pipeline. Its :order is its position in the execution." .
+
+:PipelineLink rdf:type owl:Class ;
+    rdfs:comment "An output of a step (by its output metadata name) that feeds a parameter (by its label) of a later step." .
+
+:PipelineInput rdf:type owl:Class ;
+    rdfs:comment "A parameter of a step that no link feeds. The user provides it under :hasInputName." .
+
+:PipelineDisplay rdf:type owl:Class ;
+    rdfs:comment "An output of a step (hasSourceStep + hasSourceOutput) that the user chose to see as a Graph, Table, Text or Image (hasDisplayFormat) once the pipeline has run. Unlike viz:hasVisualizationFormat, which is a promise of the concept about its output, this is a choice of the platform user about how to show it." .
+
+:hasDisplay rdf:type owl:ObjectProperty ; rdfs:domain :Pipeline ; rdfs:range :PipelineDisplay .
+:hasDisplayFormat rdf:type owl:DatatypeProperty ; rdfs:domain :PipelineDisplay ; rdfs:range xsd:string .
+
+:hasStep rdf:type owl:ObjectProperty ; rdfs:domain :Pipeline ; rdfs:range :PipelineStep .
+:hasLink rdf:type owl:ObjectProperty ; rdfs:domain :Pipeline ; rdfs:range :PipelineLink .
+:hasPipelineInput rdf:type owl:ObjectProperty ; rdfs:domain :Pipeline ; rdfs:range :PipelineInput .
+
+:hasSourceStep rdf:type owl:ObjectProperty ; rdfs:domain :PipelineLink , :PipelineDisplay ; rdfs:range :PipelineStep .
+:hasTargetStep rdf:type owl:ObjectProperty ; rdfs:domain :PipelineLink , :PipelineInput ; rdfs:range :PipelineStep .
+
+:hasSourceOutput rdf:type owl:DatatypeProperty ; rdfs:domain :PipelineLink , :PipelineDisplay ; rdfs:range xsd:string .
+:hasTargetParameter rdf:type owl:DatatypeProperty ; rdfs:domain :PipelineLink , :PipelineInput ; rdfs:range xsd:string .
+:hasInputName rdf:type owl:DatatypeProperty ; rdfs:domain :PipelineInput ; rdfs:range xsd:string ;
+    rdfs:comment "Name shown to the user (and used to fill the parameter)." .

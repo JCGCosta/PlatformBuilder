@@ -1,0 +1,81 @@
+@base <http://www.cedri.com/SmartLEM-MCMechanism#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+
+@prefix MCMechanism: <http://www.cedri.com/SmartLEM-MCMechanism#> .
+
+<http://www.cedri.com/SmartLEM-MCMechanism> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://www.cedri.com/SmartLEM-MCMechanism/1.0.0> ;
+                                                           owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                                                           <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                                           <http://purl.org/dc/terms/description> "This ontology represent the Consumption, Generation and Net-balance of community to the ASE Local Electricity Market" ;
+                                                           <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                                           <http://purl.org/dc/terms/modified> "2025-11-19" .
+
+#################################################################
+#    Classes
+#################################################################
+
+MCMechanism:UPB_MarketMechanism rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "This BM implements a Energy Community P2P strategy ... (ST1)" .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+MCMechanism:distances rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "Distances" ;
+                            bm:hasParameterType "dict" .
+
+MCMechanism:gamma_overtime rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "GammaOvertime" ;
+                            bm:hasParameterType "list" .
+
+# Expected Output Simulation
+
+MCMechanism:status rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+MCMechanism:desc rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+MCMechanism:market_results rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                          md:hasType "dict" .
+
+# Run PB ST1 Concepts
+
+MCMechanism:MarketClearingMechanism rdf:type owl:NamedIndividual ,
+                             MCMechanism:UPB_MarketMechanism ;
+                     bm:hasExternalCode MCMechanism:MarketClearingMechanismFunction ;
+                     bm:hasParameter MCMechanism:distances ,
+                                     MCMechanism:gamma_overtime ;
+                     bm:hasOutputMetadata MCMechanism:status ,
+                                          MCMechanism:desc ,
+                                          MCMechanism:market_results .
+
+MCMechanism:MarketClearingMechanismFunction rdf:type owl:NamedIndividual ,
+                                     excode:ExternalCode ;
+                               excode:hasFunction "MCMechanism" ;
+                               excode:hasPythonFile "./UPB_pkg/MarketClearingMechanism/MarketClearingMechanism.py" ;
+                               excode:requiresLib "pandas" ,
+                                                  "numpy" ,
+                                                  "pathlib" ,
+                                                  "cvxpy" .

@@ -1,0 +1,93 @@
+@prefix ui: <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix view: <http://www.cedri.com/PlatformBuilder/views/EnergyCommunityGeoLocationBasedSimulator_TOUFITMechanism#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+view:pipeline a ui:Pipeline ;
+    ui:hasDisplay view:display_1,
+        view:display_2,
+        view:display_3 ;
+    ui:hasLink view:link_1,
+        view:link_2,
+        view:link_3,
+        view:link_4 ;
+    ui:hasPipelineInput view:input_1,
+        view:input_2,
+        view:input_3 ;
+    ui:hasStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism,
+        view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTitle "EnergyCommunityGeoLocationBasedSimulator → TOUFITMechanism" ;
+    ui:order 1 .
+
+view:display_1 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Table" ;
+    ui:hasSourceOutput "billing_per_member_to_table" ;
+    ui:hasSourceStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
+    ui:hasTitle "BillingPerMemberTable" ;
+    ui:order 1 .
+
+view:display_2 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Graph" ;
+    ui:hasSourceOutput "community_aggregated_data_to_plot" ;
+    ui:hasSourceStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTitle "CommunityAggregatedConsGenGraph" ;
+    ui:order 2 .
+
+view:display_3 a ui:PipelineDisplay ;
+    ui:hasDisplayFormat "Text" ;
+    ui:hasSourceOutput "community_aggregated_billing_to_text" ;
+    ui:hasSourceStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
+    ui:hasTitle "CommunityAggregatedBilling" ;
+    ui:order 3 .
+
+view:input_1 a ui:PipelineInput ;
+    ui:hasInputName "ECConfiguration" ;
+    ui:hasTargetParameter "ECConfiguration" ;
+    ui:hasTargetStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:order 1 .
+
+view:input_2 a ui:PipelineInput ;
+    ui:hasInputName "TOU" ;
+    ui:hasTargetParameter "TOU" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
+    ui:order 2 .
+
+view:input_3 a ui:PipelineInput ;
+    ui:hasInputName "FIT" ;
+    ui:hasTargetParameter "FIT" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
+    ui:order 3 .
+
+view:link_1 a ui:PipelineLink ;
+    ui:hasSourceOutput "consumption_per_member" ;
+    ui:hasSourceStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTargetParameter "ConsumptionPerMember" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism .
+
+view:link_2 a ui:PipelineLink ;
+    ui:hasSourceOutput "deficit_per_member" ;
+    ui:hasSourceStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTargetParameter "DeficitPerMember" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism .
+
+view:link_3 a ui:PipelineLink ;
+    ui:hasSourceOutput "generation_per_member" ;
+    ui:hasSourceStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTargetParameter "GenerationPerMember" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism .
+
+view:link_4 a ui:PipelineLink ;
+    ui:hasSourceOutput "surplus_per_member" ;
+    ui:hasSourceStep view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator ;
+    ui:hasTargetParameter "SurplusPerMember" ;
+    ui:hasTargetStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism .
+
+view:step_ASE_pkg_Simulators_EnergyCommunityGeoLocationBasedSimulator a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/SmartLEM-ASE_Simulators#EnergyCommunityGeoLocationBasedSimulator> ;
+    ui:hasTitle "EnergyCommunityGeoLocationBasedSimulator" ;
+    ui:order 1 .
+
+view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism a ui:PipelineStep ;
+    ui:hasBusinessModel <http://www.cedri.com/SmartLEM-TOUFIT#TOUFITMechanism> ;
+    ui:hasTitle "TOUFITMechanism" ;
+    ui:order 2 .
+

@@ -1,0 +1,128 @@
+@base <http://www.cedri.com/SmartLEM-ASE_Simulators#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+@prefix PlatformBuilder: <http://www.cedri.com/PlatformBuilder#> .
+
+@prefix ASE_Simulators: <http://www.cedri.com/SmartLEM-ASE_Simulators#> .
+
+<http://www.cedri.com/SmartLEM-ASE_Simulators> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://www.cedri.com/SmartLEM-ASE_Simulators/2.0.0> ;
+                                                           owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                                                           <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                                           <http://purl.org/dc/terms/description> "Local Electricity Market simulator: simulates all assets of all members of an Energy Community, described in a single configuration." ;
+                                                           <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                                           <http://purl.org/dc/terms/modified> "2026-10-12" .
+
+#################################################################
+#    Classes
+#################################################################
+
+ASE_Simulators:ASE_EC_Simulators rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "Simulates all assets from all members of a Local Electricity Market (Energy Community)." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+ASE_Simulators:ECConfiguration rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "ECConfiguration" ;
+                            bm:hasParameterType "UploadFile" ;
+                            rdfs:comment "JSON file with the whole EC structure: name, latitude, longitude, tou, fit and members (each with its parameters and its assets configuration)." .
+
+# Expected Outputs
+
+ASE_Simulators:status rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+ASE_Simulators:desc rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+ASE_Simulators:simulation_timestamp rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+ASE_Simulators:community_aggregated_consumption rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+
+ASE_Simulators:community_aggregated_generation rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+
+ASE_Simulators:community_aggregated_net_balance rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+                     
+ASE_Simulators:community_aggregated_data_to_plot rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "list[object]" .
+
+ASE_Simulators:consumption_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:generation_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:net_balance_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:power_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:surplus_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:deficit_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+ASE_Simulators:asset_operation_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+# Simulate Energy Community
+
+ASE_Simulators:EnergyCommunityGeoLocationBasedSimulator rdf:type owl:NamedIndividual ,
+                                      ASE_Simulators:ASE_EC_Simulators ;
+                             bm:hasExternalCode ASE_Simulators:EC_GeoLocationBased_SimulatorFunction ;
+                             bm:hasParameter ASE_Simulators:ECConfiguration ;
+                             bm:hasOutputMetadata ASE_Simulators:status ,
+                                                  ASE_Simulators:desc ,
+                                                  ASE_Simulators:simulation_timestamp ,
+                                                  ASE_Simulators:community_aggregated_consumption ,
+                                                  ASE_Simulators:community_aggregated_generation ,
+                                                  ASE_Simulators:community_aggregated_net_balance ,
+                                                  ASE_Simulators:community_aggregated_data_to_plot ,
+                                                  ASE_Simulators:consumption_per_member ,
+                                                  ASE_Simulators:generation_per_member ,
+                                                  ASE_Simulators:power_per_member ,
+                                                  ASE_Simulators:surplus_per_member ,
+                                                  ASE_Simulators:deficit_per_member ,
+                                                  ASE_Simulators:asset_operation_per_member .
+
+ASE_Simulators:EC_GeoLocationBased_SimulatorFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "SimulateEnergyCommunity" ;
+                               excode:hasPythonFile "./ASE_pkg/Simulators/ECGeoLocationBasedSimulator.py" ;
+                               excode:requiresLib "pydantic" , "pandas" .

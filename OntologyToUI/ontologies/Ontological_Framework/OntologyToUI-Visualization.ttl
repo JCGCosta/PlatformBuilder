@@ -1,0 +1,52 @@
+@prefix : <http://www.cedri.com/OntologyToUI-Visualization#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix md: <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@base <http://www.cedri.com/OntologyToUI-Visualization#> .
+
+<http://www.cedri.com/OntologyToUI-Visualization> rdf:type owl:Ontology ;
+    owl:versionIRI <http://www.cedri.com/OntologyToUI-Visualization/1.0.0> ;
+    dcterms:description "Tells the UI how the value of an output metadata can be shown (graph, table, text or image). md:hasType keeps describing the schema of the response for OntologyToAPI; this ontology only adds the guarantee that the value follows one of the visualization formats below, so the UI never has to guess it from the type." ;
+    dcterms:issued "2026-10-27" .
+
+#################################################################
+#    Classes
+#################################################################
+
+:VisualizationFormat rdf:type owl:Class ;
+    rdfs:comment "A shape of value that the UI knows how to show. The UI checks the value against the shape before rendering it and falls back to the raw JSON when it does not match." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:hasVisualizationFormat rdf:type owl:ObjectProperty ;
+    rdfs:domain md:Metadata ;
+    rdfs:range :VisualizationFormat ;
+    rdfs:comment "The value of this output metadata is in the given visualization format. An output may declare more than one format." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+:GraphFormat rdf:type owl:NamedIndividual , :VisualizationFormat ;
+    rdfs:comment """A dict with the independent variable and the dependent variables (series) to plot:
+{
+  "graphType": "line" | "bar" | "scatter" | "pie"        (optional, default "line"),
+  "title": str, "xLabel": str, "yLabel": str              (optional),
+  "independent": {"name": str, "values": [v, ...]},
+  "dependent": [{"name": str, "values": [v, ...]}, ...]    (at least one; same length as independent.values)
+}
+For "pie" the independent values are the slice labels and the first dependent series the slice sizes.""" .
+
+:TableFormat rdf:type owl:NamedIndividual , :VisualizationFormat ;
+    rdfs:comment """A list of dicts, one per record: [{"column": value, ...}, ...]. The columns are the keys of the records (in order of first appearance); the values are scalars (nested values are shown as JSON).""" .
+
+:ImageFormat rdf:type owl:NamedIndividual , :VisualizationFormat ;
+    rdfs:comment """An image as a base64 string (the bytes of a PNG, JPEG, GIF, WebP, BMP or SVG file, optionally as a "data:image/...;base64," URI), or a dict {"image": str, "title": str (optional)}. The image type is detected from the content.""" .
+
+:TextFormat rdf:type owl:NamedIndividual , :VisualizationFormat ;
+    rdfs:comment """A string shown as it is, or a dict {"text": str, "title": str (optional)}.""" .

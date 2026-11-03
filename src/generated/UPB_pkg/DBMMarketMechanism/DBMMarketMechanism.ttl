@@ -1,0 +1,92 @@
+@base <http://www.cedri.com/SmartLEM-DBMMarketMechanism#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+
+@prefix DBMMarketMechanism: <http://www.cedri.com/SmartLEM-DBMMarketMechanism#> .
+
+<http://www.cedri.com/SmartLEM-DBMMarketMechanism> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://www.cedri.com/SmartLEM-DBMMarketMechanism/1.0.0> ;
+                                                           owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                                                           <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                                           <http://purl.org/dc/terms/description> "This ontology represent the Consumption, Generation and Net-balance of community to the ASE Local Electricity Market" ;
+                                                           <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                                           <http://purl.org/dc/terms/modified> "2025-11-19" .
+
+#################################################################
+#    Classes
+#################################################################
+
+DBMMarketMechanism:UPB_MarketMechanism rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "This BM implements a Energy Community P2P strategy ... (ST1)" .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters (Expected Inputs)
+
+DBMMarketMechanism:consumption_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "ConsumptionPerMember" ;
+                            bm:hasParameterType "dict" .
+
+DBMMarketMechanism:generation_per_member rdf:type owl:NamedIndividual ,
+                                    bm:Parameter ;
+                            bm:hasParameterLabel "GenerationPerMember" ;
+                            bm:hasParameterType "dict" .
+
+DBMMarketMechanism:community_topology rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "CommunityTopology" ;
+                            bm:hasParameterType "dict" .
+
+# Expected Output Simulation
+
+DBMMarketMechanism:status rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+DBMMarketMechanism:desc rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "str" .
+
+DBMMarketMechanism:distances rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                          md:hasType "dict" .
+
+DBMMarketMechanism:gamma_overtime rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                          md:hasType "list[list]" .
+
+# Run PB ST1 Concepts
+
+DBMMarketMechanism:DistanceBasedMatchingMechanism rdf:type owl:NamedIndividual ,
+                             DBMMarketMechanism:UPB_MarketMechanism ;
+                     bm:hasExternalCode DBMMarketMechanism:DBMMechanismFunction ;
+                     bm:hasParameter DBMMarketMechanism:consumption_per_member ,
+                                     DBMMarketMechanism:generation_per_member ,
+                                     DBMMarketMechanism:community_topology ;
+                     bm:hasOutputMetadata DBMMarketMechanism:status ,
+                                          DBMMarketMechanism:desc ,
+                                          DBMMarketMechanism:distances ,
+                                          DBMMarketMechanism:gamma_overtime .
+
+DBMMarketMechanism:DBMMechanismFunction rdf:type owl:NamedIndividual ,
+                                     excode:ExternalCode ;
+                               excode:hasFunction "DBMMarketMechanism" ;
+                               excode:hasPythonFile "./UPB_pkg/DBMMarketMechanism/DBMMarketMechanism.py" ;
+                               excode:requiresLib "pandas" ,
+                                                  "numpy" ,
+                                                  "pathlib" ,
+                                                  "cvxpy" .
