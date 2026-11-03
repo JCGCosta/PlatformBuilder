@@ -19,10 +19,10 @@ view:pipeline a ui:Pipeline ;
     ui:order 1 .
 
 view:display_1 a ui:PipelineDisplay ;
-    ui:hasDisplayFormat "Table" ;
-    ui:hasSourceOutput "billing_per_member_to_table" ;
+    ui:hasDisplayFormat "Text" ;
+    ui:hasSourceOutput "community_aggregated_billing_to_text" ;
     ui:hasSourceStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
-    ui:hasTitle "BillingPerMemberTable" ;
+    ui:hasTitle "CommunityAggregatedBilling" ;
     ui:order 1 .
 
 view:display_2 a ui:PipelineDisplay ;
@@ -33,10 +33,10 @@ view:display_2 a ui:PipelineDisplay ;
     ui:order 2 .
 
 view:display_3 a ui:PipelineDisplay ;
-    ui:hasDisplayFormat "Text" ;
-    ui:hasSourceOutput "community_aggregated_billing_to_text" ;
+    ui:hasDisplayFormat "Table" ;
+    ui:hasSourceOutput "billing_per_member_to_table" ;
     ui:hasSourceStep view:step_ASE_pkg_MarketMechanisms_TOUFITMechanism ;
-    ui:hasTitle "CommunityAggregatedBilling" ;
+    ui:hasTitle "BillingPerMemberTable" ;
     ui:order 3 .
 
 view:input_1 a ui:PipelineInput ;

@@ -32,6 +32,10 @@ async def RunCommunityConsGenCSVUpload(data):
     start = pd.Timestamp(StartingDate, tz="UTC")
     end = start + pd.Timedelta(days=AnalysisPeriod)
     
+    diff = df["generation"] - df["consumption"]
+    df["surplus"] = diff.where(diff > 0)      # generation > consumption
+    df["deficit"] = (-diff).where(diff < 0)
+    
     community_data = df[(df["utc_timestamp"] >= start) & (df["utc_timestamp"] < end)].copy()
     
     # The keys must match the outputs declared in the .ttl (bm:hasOutputMetadata)
@@ -92,4 +96,6 @@ def _pre_process_data(community_data: pd.DataFrame) -> dict:
         },
         "consumption_per_member": _per_member(df, "consumption"),
         "generation_per_member": _per_member(df, "generation"),
+        "surplus_per_member": _per_member(df, "surplus"),
+        "deficit_per_member": _per_member(df, "deficit")
     }

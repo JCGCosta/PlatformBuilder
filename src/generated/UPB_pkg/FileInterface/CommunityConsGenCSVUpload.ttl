@@ -80,6 +80,14 @@ CommunityConsGenCSVUpload:consumption_per_member rdf:type owl:NamedIndividual ,
 CommunityConsGenCSVUpload:generation_per_member rdf:type owl:NamedIndividual ,
                               md:Metadata ;
                      md:hasType "dict" .
+                     
+CommunityConsGenCSVUpload:surplus_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
+
+CommunityConsGenCSVUpload:deficit_per_member rdf:type owl:NamedIndividual ,
+                              md:Metadata ;
+                     md:hasType "dict" .
 
 # The Business Model (the concept shown in the platform)
 
@@ -91,7 +99,9 @@ CommunityConsGenCSVUpload:CommunityConsGenCSVUpload rdf:type owl:NamedIndividual
                                    CommunityConsGenCSVUpload:desc ,
                                    CommunityConsGenCSVUpload:community_aggregated_data_to_plot ,
                                    CommunityConsGenCSVUpload:consumption_per_member ,
-                                   CommunityConsGenCSVUpload:generation_per_member .
+                                   CommunityConsGenCSVUpload:generation_per_member,
+                                   CommunityConsGenCSVUpload:surplus_per_member,
+                                   CommunityConsGenCSVUpload:deficit_per_member .
 
 # External Code (the Python entry point)
 
