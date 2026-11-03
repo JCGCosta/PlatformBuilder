@@ -2,6 +2,7 @@
 /LegacyOperations
 /concept_packages
 /tmp
+/src/assets/dados
 # Generated UI (Vite app): dependencies and build output
 src/generated/ui/node_modules/
 src/generated/ui/dist/
